@@ -41,8 +41,8 @@ async def create_tweet(tweet_body: tweet_schema.TweetCreate):
     return tweet_schema.TweetCreateResponse(tweet_id=1, **tweet_body.dict())
 
 @router.put("/tweets/{tweet_id}", tags=["tweets"], response_model=tweet_schema.TweetCreateResponse)
-async def update_tweet(tweet_body: tweet_schema.TweetCreate):
-    return tweet_schema.TweetCreateResponse(tweet_id={tweet_id}, **tweet_body.dict())
+async def update_tweet(tweet_id: int, tweet_body: tweet_schema.TweetCreate):
+    return tweet_schema.TweetCreateResponse(tweet_id=tweet_id, **tweet_body.dict())
 
 @router.delete("/tweets/{tweet_id}", tags=["tweets"], response_model=None)
 async def delete_tweet(tweet_id: int):
