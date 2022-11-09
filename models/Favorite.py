@@ -4,8 +4,8 @@ from datetime import datetime
 
 from db import Base
 
-class Follow(Base):
-    __tablename__ = "follow"
+class Favorite(Base):
+    __tablename__ = "favorite"
 
     user_id = Column(Integer, ForeignKey('user.user_id'), primary_key=True)
     tweet_id = Column(Integer, ForeignKey('tweet.tweet_id'), primary_key=True)

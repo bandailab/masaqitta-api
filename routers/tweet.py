@@ -1,4 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+
+import cruds.tweet as tweet_crud
+from db import get_db
 
 from typing import List
 import datetime
@@ -37,8 +41,8 @@ async def get_tweet(tweet_id: int):
     )
 
 @router.post("/tweets", tags=["tweets"], response_model=tweet_schema.TweetCreateResponse)
-async def create_tweet(tweet_body: tweet_schema.TweetCreate):
-    return tweet_schema.TweetCreateResponse(tweet_id=1, **tweet_body.dict())
+async def create_tweet(tweet_body: tweet_schema.TweetCreate, db: AsyncSession = Depends(get_db)):
+    return await tweet_crud.create_task(db, tweet_body)
 
 @router.put("/tweets/{tweet_id}", tags=["tweets"], response_model=tweet_schema.TweetCreateResponse)
 async def update_tweet(tweet_id: int, tweet_body: tweet_schema.TweetCreate):

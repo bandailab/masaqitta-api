@@ -4,7 +4,7 @@ from datetime import datetime
 
 from db import Base, Tweet
 
-from . import Favorite
+from models import Favorite
 
 class User(Base):
     __tablename__ = "user"
@@ -16,8 +16,8 @@ class User(Base):
 
     grade = relationship("Grade", back_populate="users")
 
-    favorite = relationship("Favorite", secondary=Favorite.__tablename__, back_populates="users")
+    favorite = relationship("Favorite", secondary=Favorite, back_populates="users")
 
-    follow = relationship("Follow", secondary=Tweet.__tablename__, back_populate="users")
-    follower = relationship("Follow", secondary=Tweet.__tablename__, back_populate="users")
+    follow = relationship("Follow", secondary=Tweet, back_populate="users")
+    follower = relationship("Follow", secondary=Tweet, back_populate="users")
     

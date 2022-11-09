@@ -4,7 +4,7 @@ from datetime import datetime
 
 from db import Base
 
-from . import User
+from models import Favorite
 
 class Tweet(Base):
     __tablename__ = "tweet"
@@ -13,4 +13,4 @@ class Tweet(Base):
     text = Column("text", String(512))
     createdAt = Column("createdat", DATETIME, default=datetime.now, nullable=False)
 
-    favorite = relationship("Favorite", secondary=Favorite.__tablename__, back_populates="tweets")
+    favorite = relationship("Favorite", secondary=Favorite, back_populates="tweets")
