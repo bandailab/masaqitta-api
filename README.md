@@ -3,6 +3,6 @@
 ## Usage
 
 ```
-# pip install fastapi "uvicorn[standard]"
-$ uvicorn main:app --reload
+$ docker-compose build
+$ docker-compose up 
 ```
