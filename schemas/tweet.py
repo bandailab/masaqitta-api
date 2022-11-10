@@ -1,31 +1,24 @@
-from typing import Union, Optional
-from pydantic import BaseModel, Field
-import datetime
+from typing import Union
+from pydantic import BaseModel
 
-class Favorite(BaseModel):
-    isFavorite: str = Field(None)
+class Like(BaseModel):
+    isLike: bool
     count: int
 
-class TweetBase(BaseModel):
-    name: str = Field(None)
-    userName: str = Field(None)
-    imageURL: str = Field(None)
+class Retweet(BaseModel):
+    isRetweet: bool
+    count: int
 
-class TweetCreate(TweetBase):
-    pass
+class Reply(BaseModel):
+    isReply: bool
+    count: int
 
-class Tweet(TweetBase):
-    tweet_id: int
-    createdAt: datetime.datetime = Field(None)
-    favorite: Union[Favorite, None] = Field(None)
-
-    class Config:
-        orm_mode: True
-
-class TweetCreateResponse(TweetBase):
-    tweet_id: int
-    following: int
-    follower: int
-
-    class Config:
-        orm_mode: True
+class Tweet(BaseModel):
+    key: int
+    name: str
+    userName: str
+    imageURL: str
+    text: str
+    like: Union[Like, None]
+    retweet: Union[Retweet, None]
+    reply: Union[Reply, None]
