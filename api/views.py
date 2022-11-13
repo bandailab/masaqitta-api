@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from .models import User, Tweet, Grade
 from .serializer import UserSerializer, TweetSerializer
 
@@ -9,7 +9,9 @@ from .serializer import UserSerializer, TweetSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class TweetViewSet(viewsets.ModelViewSet):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
+    permission_classes = (permissions.IsAuthenticated,)
